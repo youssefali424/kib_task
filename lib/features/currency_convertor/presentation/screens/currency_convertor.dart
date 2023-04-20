@@ -106,6 +106,9 @@ class _CurrencyConvertorScreenState
           });
           return ScreenHandler(
             provider: currencyConvertorBlocProvider,
+            onRetry: () {
+              bloc.add(const LoadCurrenciesEvent());
+            },
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(20),
               child: Column(
@@ -149,7 +152,7 @@ class _CurrencyConvertorScreenState
   Future<Currency?> openCurrenciesList(
       BuildContext context, Currency? currency) async {
     return await showModalBottomSheet<Currency?>(
-      context: context, 
+      context: context,
       isScrollControlled: true,
       // backgroundColor: Colors.transparent,
       builder: (context) => CurrenciesBottomSheet(selectedCurrency: currency),

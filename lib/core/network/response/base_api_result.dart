@@ -24,7 +24,7 @@ class FailureApiResult<T> extends ApiResult<T> {
 }
 
 enum ErrorType {
-  noNework,
+  noNetwork,
   validationError,
   generalError,
   unAuthorized,

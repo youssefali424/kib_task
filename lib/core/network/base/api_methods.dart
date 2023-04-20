@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:kib_task/core/network/response/base_api_result.dart';
 
@@ -72,12 +74,15 @@ abstract class ApiMethods {
   }
 
   ApiResult<E> handleDioErrors<E>(DioError dioError) {
+    if(dioError.error is SocketException) {
+      return FailureApiResult<E>(errorType: ErrorType.noNetwork);
+    }
     switch (dioError.type) {
       case DioErrorType.connectionTimeout:
       case DioErrorType.receiveTimeout:
       case DioErrorType.sendTimeout:
       case DioErrorType.connectionError:
-        return FailureApiResult<E>(errorType: ErrorType.noNework);
+        return FailureApiResult<E>(errorType: ErrorType.noNetwork);
       default:
         return FailureApiResult<E>(errorType: ErrorType.generalError);
     }

@@ -5,7 +5,7 @@ mixin ErrorMessageMixin {
   String getMessage(ErrorType errorType,
       {Map<String, dynamic>? keyValueErrors, String? message}) {
     switch (errorType) {
-      case ErrorType.noNework:
+      case ErrorType.noNetwork:
         return Translations.noInternet;
       case ErrorType.validationError:
         if (keyValueErrors != null && keyValueErrors.isNotEmpty) {

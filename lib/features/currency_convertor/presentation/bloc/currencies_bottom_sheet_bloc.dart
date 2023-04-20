@@ -44,7 +44,7 @@ class CurrenciesBottomSheetBloc
               message: ""));
         } else if (result is FailureApiResult) {
           final errorType = (result as FailureApiResult).errorType;
-          if (errorType == ErrorType.noNework) {
+          if (errorType == ErrorType.noNetwork) {
             emit(state.copyWith(
                 isLoading: false, message: "", hasNoConnection: true));
             return;

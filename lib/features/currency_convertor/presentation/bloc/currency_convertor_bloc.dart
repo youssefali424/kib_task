@@ -66,7 +66,10 @@ class CurrencyConvertorBloc extends Bloc<CurrencyEvent, CurrencyConvertorState>
               message: ""));
           return;
         }
-        emit(state.copyWith(isLoading: true));
+        emit(state.copyWith(
+          isLoading: true,
+          hasNoConnection: false,
+        ));
         var result = await _getCurrencies();
         if (result is SuccessApiResult) {
           var currencies = result.data ?? {};
@@ -75,10 +78,11 @@ class CurrencyConvertorBloc extends Bloc<CurrencyEvent, CurrencyConvertorState>
               from: currencies.values.first,
               to: currencies.values.elementAt(1),
               isLoading: false,
+              hasNoConnection: false,
               message: ""));
         } else if (result is FailureApiResult) {
           final errorType = (result as FailureApiResult).errorType;
-          if (errorType == ErrorType.noNework) {
+          if (errorType == ErrorType.noNetwork) {
             emit(state.copyWith(
                 isLoading: false, message: "", hasNoConnection: true));
             return;
@@ -89,6 +93,7 @@ class CurrencyConvertorBloc extends Bloc<CurrencyEvent, CurrencyConvertorState>
           emit(state.copyWith(
             isLoading: false,
             message: message,
+            hasNoConnection: false,
           ));
         }
       },
@@ -96,6 +101,7 @@ class CurrencyConvertorBloc extends Bloc<CurrencyEvent, CurrencyConvertorState>
     on<OnAmountChangedEvent>((event, emit) {
       emit(state.copyWith(
         amount: double.tryParse(event.amount) ?? 0,
+        message: "",
       ));
     });
     on<ReplaceCurrencyEvent>(replaceSelectedCurrency);
@@ -113,7 +119,9 @@ class CurrencyConvertorBloc extends Bloc<CurrencyEvent, CurrencyConvertorState>
       to: event.to ?? state.to,
       message: "",
     ));
-    add(const CurrencyConvertorEvent());
+    if (state.amount != null && state.amount != 0) {
+      add(const CurrencyConvertorEvent());
+    }
   }
 
   void switchCurrenciesCurrency(
@@ -123,6 +131,8 @@ class CurrencyConvertorBloc extends Bloc<CurrencyEvent, CurrencyConvertorState>
       to: state.from,
       message: "",
     ));
-    add(const CurrencyConvertorEvent());
+    if (state.amount != null && state.amount != 0) {
+      add(const CurrencyConvertorEvent());
+    }
   }
 }
