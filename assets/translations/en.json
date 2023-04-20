@@ -1,0 +1,10 @@
+{
+  "appName": "Currency Convertor",
+  "unknownError": "Unknown error, please try again later",
+  "noInternet": "No internet connection",
+  "convert": "Convert",
+  "retry": "Retry",
+  "amountError": "Please enter a valid amount",
+  "convertFrom": "Convert from",
+  "convertTo": "Convert to"
+}
