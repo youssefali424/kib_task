@@ -6,5 +6,9 @@
   "retry": "Retry",
   "amountError": "Please enter a valid amount",
   "convertFrom": "Convert from",
-  "convertTo": "Convert to"
+  "convertTo": "Convert to",
+  "language": "Language",
+  "darkMode": "Dark mode",
+  "history": "History",
+  "settings": "Settings"
 }

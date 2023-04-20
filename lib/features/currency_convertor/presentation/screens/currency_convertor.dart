@@ -6,6 +6,7 @@ import 'package:kib_task/features/base/presentation/widgets/app_loader.dart';
 import 'package:kib_task/features/currency_convertor/data/models/currency.dart';
 import 'package:kib_task/features/currency_convertor/presentation/bloc/currency_converter_state.dart';
 import 'package:kib_task/features/currency_convertor/presentation/bloc/currency_convertor_bloc.dart';
+import 'package:kib_task/features/settings/presentation/screens/settings.dart';
 
 import '../../../../core/di/currency_conversion_di.dart';
 import '../../../base/presentation/widgets/screen_handler.dart';
@@ -70,6 +71,14 @@ class _CurrencyConvertorScreenState
     return Scaffold(
       appBar: AppBar(
         title: Text(Translations.appName),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () {
+              Navigator.of(context).pushNamed(SettingsScreen.routeName);
+            },
+          )
+        ],
       ),
       body: Consumer(
         builder: (context, ref, child) {

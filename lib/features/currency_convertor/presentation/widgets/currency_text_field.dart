@@ -68,12 +68,9 @@ class _CurrencyTextFieldState extends State<CurrencyTextField> {
                 color: widget.enabled
                     ? hasFocus
                         ? theme.primaryColor
-                        : theme.disabledColor
-                    : theme.dividerColor,
+                        : theme.dividerColor
+                    : theme.disabledColor,
                 width: widget.enabled && hasFocus ? 2 : 1,
-
-                // borderSide: BorderSide(color: theme.disabledColor),
-                // borderRadius: BorderRadius.circular(10),
               ),
             ),
             child: child,
@@ -129,9 +126,6 @@ class _CurrencyTextFieldState extends State<CurrencyTextField> {
                 child: TextField(
                   enabled: widget.enabled,
                   maxLines: 1,
-                  onTap: () {
-                    debugPrint("tap");
-                  },
                   controller: widget.controller,
                   focusNode: focusNode,
                   keyboardType: TextInputType.number,

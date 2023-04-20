@@ -6,5 +6,9 @@
   "retry": "إعادة المحاولة",
   "amountError": "الرجاء إدخال المبلغ",
   "convertFrom": "تحويل من",
-  "convertTo": "تحويل إلى"
+  "convertTo": "تحويل إلى",
+  "language": "اللغة",
+  "darkMode": "الوضع الليلي",
+  "history": "التحويلات السابقة",
+  "settings": "الإعدادات"
 }

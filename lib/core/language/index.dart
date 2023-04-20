@@ -9,4 +9,8 @@ class Translations {
   static String get amountError => "amountError".tr();
   static String get convertFrom => "convertFrom".tr();
   static String get convertTo => "convertTo".tr();
+  static String get language => "language".tr();
+  static String get darkMode => "darkMode".tr();
+  static String get settings => "settings".tr();
+  static String get history => "history".tr();
 }
