@@ -13,10 +13,9 @@ import '../../../base/presentation/widgets/screen_handler.dart';
 import '../widgets/currency_text_field.dart';
 import 'currencies_bottom_sheet.dart';
 
-class CurrencyConvertorPage extends StatelessWidget {
+class CurrencyConvertorScreen extends StatelessWidget {
   static const routeName = '/currency_convertor';
-
-  const CurrencyConvertorPage({Key? key}) : super(key: key);
+  const CurrencyConvertorScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,28 +23,27 @@ class CurrencyConvertorPage extends StatelessWidget {
       overrides: [
         currencyConvertorBlocProvider.overrideWith(
           (ref) => CurrencyConvertorBloc(
-            ref.watch(getCurrencyConversionProvider),
-            ref.watch(getCurrenciesProvider),
-            ref.watch(getLocalCurrenciesProvider),
-            ref.watch(saveCurrenciesProvider),
-          ),
+              ref.watch(getCurrencyConversionProvider),
+              ref.watch(getCurrenciesProvider),
+              ref.watch(getLocalCurrenciesProvider),
+              ref.watch(saveCurrenciesProvider)),
         )
       ],
-      child: const CurrencyConvertorScreen(),
+      child: const _CurrencyConvertorPage(),
     );
   }
 }
 
-class CurrencyConvertorScreen extends ConsumerStatefulWidget {
-  const CurrencyConvertorScreen({Key? key}) : super(key: key);
+class _CurrencyConvertorPage extends ConsumerStatefulWidget {
+  const _CurrencyConvertorPage({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<CurrencyConvertorScreen> createState() =>
-      _CurrencyConvertorScreenState();
+  ConsumerState<_CurrencyConvertorPage> createState() =>
+      __CurrencyConvertorPageState();
 }
 
-class _CurrencyConvertorScreenState
-    extends ConsumerState<CurrencyConvertorScreen> {
+class __CurrencyConvertorPageState
+    extends ConsumerState<_CurrencyConvertorPage> {
   final TextEditingController controller = TextEditingController();
 
   @override
@@ -67,7 +65,6 @@ class _CurrencyConvertorScreenState
   @override
   Widget build(BuildContext context) {
     var bloc = ref.watch(currencyConvertorBlocProvider.bloc);
-
     return Scaffold(
       appBar: AppBar(
         title: Text(Translations.appName),
@@ -80,94 +77,86 @@ class _CurrencyConvertorScreenState
           )
         ],
       ),
-      body: Consumer(
-        builder: (context, ref, child) {
-          var isLoading = ref.watch(
-              currencyConvertorBlocProvider.select((value) => value.isLoading));
-
-          var from = ref.watch(
-              currencyConvertorBlocProvider.select((value) => value.from));
-          var to = ref
-              .watch(currencyConvertorBlocProvider.select((value) => value.to));
-          if (isLoading && from == null && to == null) {
-            return const AppLoader(
-              isLoading: true,
-            );
-          }
-          ref.listen(
-              currencyConvertorBlocProvider.select(
-                  (value) => value.converstionAmount), (_, converstionAmount) {
-            if (converstionAmount != null) {
-              var converstionAmountString =
-                  converstionAmount.toStringAsFixed(5);
-              int length = 0;
-              if (converstionAmountString.contains(".")) {
-                length =
-                    converstionAmountString.split('.')[1].substring(0).length;
-              }
-              var formatter = CurrencyTextInputFormatter(
-                symbol: '${to?.symbol ?? ""} ',
-                name: to?.name,
-                decimalDigits: length,
-              );
-              controller.text = formatter.format(converstionAmountString);
-            }
-          });
-          return ScreenHandler(
-            provider: currencyConvertorBlocProvider,
-            onRetry: () {
-              bloc.add(const LoadCurrenciesEvent());
-            },
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  CurrencyTextField(
-                    currency: from,
-                    label: Translations.convertFrom,
-                    onChanged: (value) {
-                      bloc.add(OnAmountChangedEvent(amount: value));
-                    },
-                    onOpenCurrencyList: () {
-                      _showFromCurrencies(context, from);
-                    },
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TextButton.icon(
-                        onPressed: () {
-                          bloc.add(const SwitchCurrenciesEvent());
-                        },
-                        icon: const Icon(Icons.swap_vert),
-                        label: Text(Translations.swap),
-                      ),
-                    ],
-                  ),
-                  const Icon(Icons.arrow_downward),
-                  const SizedBox(height: 5),
-                  CurrencyTextField(
-                    currency: to,
-                    enabled: false,
-                    controller: controller,
-                    label: Translations.convertTo,
-                    onOpenCurrencyList: () {
-                      _showToCurrencies(context, to);
-                    },
-                  ),
-                  const SizedBox(height: 35),
-                  ElevatedButton(
-                    onPressed: () {
-                      bloc.add(const CurrencyConvertorEvent());
-                    },
-                    child: Text(Translations.convert),
-                  ),
-                ],
-              ),
-            ),
+      body: Consumer(builder: (context, ref, child) {
+        var isLoading = ref.watch(
+            currencyConvertorBlocProvider.select((value) => value.isLoading));
+        var from = ref
+            .watch(currencyConvertorBlocProvider.select((value) => value.from));
+        var to = ref
+            .watch(currencyConvertorBlocProvider.select((value) => value.to));
+        if (isLoading && from == null && to == null) {
+          return const AppLoader(
+            isLoading: true,
           );
-        },
-      ),
+        }
+        ref.listen(
+            currencyConvertorBlocProvider.select(
+                (value) => value.converstionAmount), (_, converstionAmount) {
+          if (converstionAmount != null) {
+            var converstionAmountString = converstionAmount.toStringAsFixed(5);
+            int length = 0;
+            if (converstionAmountString.contains(".")) {
+              length =
+                  converstionAmountString.split('.')[1].substring(0).length;
+            }
+            var formatter = CurrencyTextInputFormatter(
+              symbol: '${to?.symbol ?? ""} ',
+              name: to?.name,
+              decimalDigits: length,
+            );
+            controller.text = formatter.format(converstionAmountString);
+          }
+        });
+        return ScreenHandler(
+            provider: currencyConvertorBlocProvider,
+            onRetry: () => bloc.add(const LoadCurrenciesEvent()),
+            child: SingleChildScrollView(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                    CurrencyTextField(
+                      currency: from,
+                      label: Translations.convertFrom,
+                      onChanged: (value) {
+                        bloc.add(OnAmountChangedEvent(amount: value));
+                      },
+                      onOpenCurrencyList: () {
+                        _showFromCurrencies(context, from);
+                      },
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton.icon(
+                          onPressed: () {
+                            bloc.add(const SwitchCurrenciesEvent());
+                          },
+                          icon: const Icon(Icons.swap_vert),
+                          label: Text(Translations.swap),
+                        ),
+                      ],
+                    ),
+                    const Icon(Icons.arrow_downward),
+                    const SizedBox(height: 5),
+                    CurrencyTextField(
+                      currency: to,
+                      enabled: false,
+                      controller: controller,
+                      label: Translations.convertTo,
+                      onOpenCurrencyList: () {
+                        _showToCurrencies(context, to);
+                      },
+                    ),
+                    const SizedBox(height: 35),
+                    ElevatedButton(
+                      onPressed: () {
+                        bloc.add(const CurrencyConvertorEvent());
+                      },
+                      child: Text(Translations.convert),
+                    ),
+                  ],
+                )));
+      }),
     );
   }
 
@@ -176,17 +165,13 @@ class _CurrencyConvertorScreenState
     return await showModalBottomSheet<Currency?>(
       context: context,
       isScrollControlled: true,
-      // backgroundColor: Colors.transparent,
       builder: (context) => CurrenciesBottomSheet(selectedCurrency: currency),
-      // backgroundColor: Colors.grey.withOpacity(0.3),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(20),
         ),
       ),
     );
-    // var response = await controller.closed;
-    // return response;
   }
 
   void _showFromCurrencies(BuildContext context, Currency? currency) async {
