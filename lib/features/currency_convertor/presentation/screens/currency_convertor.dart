@@ -132,7 +132,20 @@ class _CurrencyConvertorScreenState
                       _showFromCurrencies(context, from);
                     },
                   ),
-                  const SizedBox(height: 30),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton.icon(
+                        onPressed: () {
+                          bloc.add(const SwitchCurrenciesEvent());
+                        },
+                        icon: const Icon(Icons.swap_vert),
+                        label: Text(Translations.swap),
+                      ),
+                    ],
+                  ),
+                  const Icon(Icons.arrow_downward),
+                  const SizedBox(height: 5),
                   CurrencyTextField(
                     currency: to,
                     enabled: false,

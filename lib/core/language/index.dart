@@ -13,4 +13,5 @@ class Translations {
   static String get darkMode => "darkMode".tr();
   static String get settings => "settings".tr();
   static String get history => "history".tr();
+  static String get swap => "swap".tr();
 }
