@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:kib_task/core/network/api_handlers/free_currency/api_config.dart';
 import 'package:kib_task/core/network/api_handlers/free_currency/api_methods.dart';

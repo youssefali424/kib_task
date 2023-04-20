@@ -1,5 +1,4 @@
 import 'package:kib_task/features/currency_convertor/data/models/currency.dart';
-import 'package:kib_task/features/currency_convertor/domain/usecases/get_currencies.dart';
 
 import '../../../../core/network/response/base_api_result.dart';
 

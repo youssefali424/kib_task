@@ -1,6 +1,5 @@
 import 'package:kib_task/core/network/api_handlers/free_currency/api_methods.dart';
 import 'package:kib_task/core/network/api_handlers/free_currency/api_urls.dart';
-import 'package:kib_task/features/currency_convertor/domain/usecases/get_currencies.dart';
 
 import '../../../../core/network/response/base_api_result.dart';
 

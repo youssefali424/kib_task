@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:kib_task/core/language/index.dart';
 import 'package:kib_task/gen/assets.gen.dart';
 

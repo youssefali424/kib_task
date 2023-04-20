@@ -17,6 +17,7 @@ class CurrenciesLocalDataSourceImpl extends CurrenciesLocalDataSource {
         .map((key, value) => MapEntry(value.code, value));
   }
 
+  @override
   Future<void> saveCurrencies(Map<String, Currency> currencies) async {
     if (hiveBox.isOpen) {
       await hiveBox.putAll(currencies);
