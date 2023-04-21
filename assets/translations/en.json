@@ -9,7 +9,9 @@
   "convertTo": "Convert to",
   "language": "Language",
   "darkMode": "Dark mode",
-  "history": "History",
+  "history": "Currency History",
   "settings": "Settings",
-  "swap": "Swap"
+  "swap": "Swap",
+  "chart": "Chart",
+  "showList": "Show list"
 }

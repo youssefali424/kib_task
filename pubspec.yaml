@@ -49,6 +49,7 @@ dependencies:
   hive_flutter: ^1.1.0
   hive_generator: ^2.0.0
   currency_text_input_formatter: 2.1.8
+  syncfusion_flutter_charts: ^21.1.41
 
 dev_dependencies:
   flutter_test:

@@ -36,7 +36,7 @@ class SplashScreen extends StatelessWidget {
                 onPlay: (_) {
                   Future.delayed(const Duration(milliseconds: 700), () {
                     Navigator.of(context)
-                        .pushReplacementNamed(CurrencyConvertorPage.routeName);
+                        .pushReplacementNamed(CurrencyConvertorScreen.routeName);
                   });
                 },
                 child: Container(

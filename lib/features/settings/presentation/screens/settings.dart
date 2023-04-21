@@ -6,6 +6,7 @@ import 'package:kib_task/core/language/supported.dart';
 import 'package:kib_task/features/settings/presentation/bloc/theme_mode_event.dart';
 
 import '../../../../core/di/settings_di.dart';
+import '../../../history/presentation/screens/history.dart';
 
 class SettingsScreen extends StatelessWidget {
   static const routeName = '/settings';
@@ -50,7 +51,9 @@ class SettingsScreen extends StatelessWidget {
         ),
         ListTile(
           title: Text(Translations.history),
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).pushNamed(HistoryScreen.routeName);
+          },
           trailing: const Icon(Icons.arrow_forward_ios),
         ),
       ]),

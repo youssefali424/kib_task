@@ -14,4 +14,6 @@ class Translations {
   static String get settings => "settings".tr();
   static String get history => "history".tr();
   static String get swap => "swap".tr();
+  static String get chart => "chart".tr();
+  static String get showList => "showList".tr();
 }

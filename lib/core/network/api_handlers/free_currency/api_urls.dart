@@ -3,5 +3,5 @@ class FreeCurrencyApiUrls {
       'https://api.freecurrencyapi.com/v1/';
   static const String currencyList = 'currencies';
   static const String currencyConvertRate = 'latest';
-  static const String flagcdnBaseUrl = 'https://flagcdn.com/w80/';
+  static const String history = 'historical';
 }
