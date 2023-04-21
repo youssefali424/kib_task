@@ -29,7 +29,10 @@ class CurrencyConvertorScreen extends StatelessWidget {
               ref.watch(saveCurrenciesProvider)),
         )
       ],
-      child: const _CurrencyConvertorPage(),
+      /// const constructor doesn't update the state
+      /// for translation change 
+      // ignore: prefer_const_constructors
+      child: _CurrencyConvertorPage(),
     );
   }
 }

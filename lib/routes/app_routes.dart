@@ -5,10 +5,14 @@ import 'package:kib_task/features/splash/presentation/splash.dart';
 
 import '../features/history/presentation/screens/history.dart';
 
+/// const constructor doesn't update the state
+/// for translation change
 final routes = <String, WidgetBuilder>{
   SplashScreen.routeName: (BuildContext context) => const SplashScreen(),
   CurrencyConvertorScreen.routeName: (BuildContext context) =>
-      const CurrencyConvertorScreen(),
+      // ignore: prefer_const_constructors
+      CurrencyConvertorScreen(),
   SettingsScreen.routeName: (BuildContext context) => const SettingsScreen(),
-  HistoryScreen.routeName: (BuildContext context) => const HistoryScreen(),
+  // ignore: prefer_const_constructors
+  HistoryScreen.routeName: (BuildContext context) => HistoryScreen(),
 };
