@@ -10,8 +10,7 @@ abstract class ApiMethods {
 
   ApiMethods({required this.requesterDio});
 
-  Future<ApiResult<T>> get<T>(String url,
-      {Map<String, String>? params, bool cache = false}) async {
+  Future<ApiResult<T>> get<T>(String url, {Map<String, String>? params}) async {
     try {
       Response response = await requesterDio.get(
         url,
@@ -19,14 +18,13 @@ abstract class ApiMethods {
         options: options,
       );
 
-      return handleResponse(response);
+      return handleResponse<T>(response);
     } on DioError catch (error) {
       return catchError<T>(error);
     }
   }
 
-  Future<ApiResult<T>> post<T>(String url,
-      {Map<String, dynamic>? data, bool cache = false}) async {
+  Future<ApiResult<T>> post<T>(String url, {Map<String, dynamic>? data}) async {
     try {
       Response response = await requesterDio.post(
         url,
@@ -34,14 +32,14 @@ abstract class ApiMethods {
         options: options,
       );
 
-      return handleResponse(response);
+      return handleResponse<T>(response);
     } on DioError catch (error) {
       return catchError(error);
     }
   }
 
   Future<ApiResult<T>> postWithFormData<T>(String url,
-      {required FormData data, bool cache = false}) async {
+      {required FormData data}) async {
     try {
       Response response = await requesterDio.post(
         url,
@@ -74,7 +72,7 @@ abstract class ApiMethods {
   }
 
   ApiResult<E> handleDioErrors<E>(DioError dioError) {
-    if(dioError.error is SocketException) {
+    if (dioError.error is SocketException) {
       return FailureApiResult<E>(errorType: ErrorType.noNetwork);
     }
     switch (dioError.type) {
@@ -121,4 +119,3 @@ abstract class ApiMethods {
 const int unauthorizedError = 401;
 const int validationError = 422;
 const int notFound = 404;
-
