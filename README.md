@@ -52,6 +52,7 @@ flutter test
 |                     `-- widgets - contains feature widgets
 `------ gen - contains generated files
 `------ routes - contains app routes
+|-- test - contains all tests
 ```
 
 ### why use riverpod instead of other dependency injection libraries?:
