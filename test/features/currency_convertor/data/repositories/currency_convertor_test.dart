@@ -9,7 +9,6 @@ import 'package:kib_task/features/currency_convertor/data/models/currency.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../utils.dart';
-import '../data_source/currencies_local_test.dart';
 
 class MockCurrenciesLocalDataSource extends Mock
     implements CurrenciesLocalDataSource {}
