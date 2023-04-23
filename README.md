@@ -5,7 +5,7 @@ A new Flutter project.
 ## Getting Started
 
 ### Build:
-- this is asuming you alreay have flutter installed onthe current device if not please refer to [flutter.dev](https://flutter.dev)
+- this is assuming you already have flutter installed on the current device if not please refer to [flutter.dev](https://flutter.dev)
 ```bash
 ./build.sh
 flutter run
