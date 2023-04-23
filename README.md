@@ -60,6 +60,7 @@ flutter test
 - Easy to test and mock.
 - Easy to override dependencies in tests and different parts of the app tree.
 - Object dependencies easy to manage and override.
+- The model used to create providers offers compile time analysis (with provider there is a common mistake, forgetting to create provider in tree now eliminated wih riverpod).
 - Provider package was created by Remi Rousselet, the creator of Riverpod.
 - The author decided to create Riverpod to overcome Provider's limitations.
 - flutter_bloc by default uses Provider for dependency injection under the hood.
