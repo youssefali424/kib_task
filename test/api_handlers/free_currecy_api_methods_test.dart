@@ -114,7 +114,7 @@ void main() {
       );
     });
   });
-  group("response returns no network", () {
+  group("response on no network", () {
     late FreeCurrencyApiMethodsImpl freeCurrencyApiMethods;
     setUp(() {
       dioAdapter = DioAdapter(dio: dio, matcher: const UrlRequestMatcher());
@@ -129,7 +129,7 @@ void main() {
       );
       freeCurrencyApiMethods = FreeCurrencyApiMethodsImpl(requesterDio: dio);
     });
-    test('latest api response no network', () async {
+    test('"latest" response should return failure', () async {
       final response = await freeCurrencyApiMethods.get<Map<String, double>>(
           FreeCurrencyApiUrls.currencyConvertRate,
           params: {
@@ -142,7 +142,7 @@ void main() {
       );
       expect((response as FailureApiResult).errorType, ErrorType.noNetwork);
     });
-    test('currencies api response no network', () async {
+    test('"currencies" response should return failure', () async {
       final response = await freeCurrencyApiMethods.get<Map<String, double>>(
         FreeCurrencyApiUrls.currencyList,
       );

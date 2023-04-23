@@ -20,8 +20,9 @@ class CurrencyConvertorBloc extends Bloc<CurrencyEvent, CurrencyConvertorState>
     this._getCurrencyConversion,
     this._getCurrencies,
     this._getLocalCurrencies,
-    this._saveCurrencies,
-  ) : super(const CurrencyConvertorState()) {
+    this._saveCurrencies, {
+    CurrencyConvertorState initialState = const CurrencyConvertorState(),
+  }) : super(initialState) {
     on<CurrencyConvertorEvent>(
       (event, emit) async {
         if (state.from == null || state.to == null) {
